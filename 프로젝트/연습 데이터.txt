@@ -1,0 +1,8 @@
+SELECT * FROM haeyodb.users;
+INSERT INTO users(u_name,u_email,u_pwd,u_phone,u_address,u_agreecheck,u_pic,u_nick) VALUES('홍길동','hong@naver.com','1111','010-1111-1111','서울시 마포구 비트캠프',1,'내사진','삥빵뽕');
+INSERT INTO users(u_name,u_email,u_pwd,u_phone,u_address,u_agreecheck,u_pic,u_nick) VALUES('임꺽정','lim@naver.com','1111','010-2222-2222','서울시 종로구 비트캠프',1,'내사진','룰루랄라');
+
+INSERT INTO users VALUES('장길산','jang@naver.com','1111','010-1111-1111','서울시 마포구 비트캠프',1,'내사진','장장장');
+
+delete FROM users;
+ALTER TABLE users AUTO_INCREMENT=1;

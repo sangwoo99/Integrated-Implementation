@@ -1,0 +1,399 @@
+
+CREATE TABLE users
+(
+    `u_no`          INT             NOT NULL    AUTO_INCREMENT COMMENT '유저번호', 
+    `u_name`        VARCHAR(45)     NULL        COMMENT '유저이름', 
+    `u_email`       VARCHAR(45)     NULL        COMMENT '유저이메일', 
+    `u_pwd`         VARCHAR(45)     NULL        COMMENT '유저비밀번호', 
+    `u_phone`       VARCHAR(15)     NULL        COMMENT '유저전화번호', 
+    `u_address`     VARCHAR(200)    NULL        COMMENT '유저주소',
+	`u_loc_x`     	FLOAT           default 0   COMMENT '유저x좌표', 
+    `u_loc_y`     	FLOAT           default 0   COMMENT '유저y좌표', 
+    `u_agreecheck`  INT             default 0   COMMENT '유저약관동의' , 
+    `u_pic`         VARCHAR(200)    NULL        COMMENT '유저사진', 
+    `u_nick`        VARCHAR(45)     NULL        COMMENT '유저닉네임', 
+    PRIMARY KEY (u_no)
+);
+
+
+ALTER TABLE users COMMENT '사용자';
+INSERT INTO users VALUES (10001 , "이수민", "soomin@bit.com", "dltnals1234^^", "010-4567-1524", "서울 마포구 대흥동 660 마포태영아파트 707호", 37.564320626098336, 126.90779472719049, 1, "u_pic_image01", "이수진");
+INSERT INTO users VALUES (10002 , "장현아", "jang@bit.com", "wkdgusdk1234^^", "010-2331-2830", "서울 마포구 대흥동 12-27 503호",  37.564320626098336, 126.90779472719049, 1, "u_pic_image02", "장나우");
+INSERT INTO users VALUES (10003 , "손예인", "hand@bit.com", "thsdPdls1234^^", "010-2356-1478", "서울 마포구 대흥동 803 308호", 37.564320626098336, 126.90779472719049, 1, "u_pic_image03", "손미개");
+INSERT INTO users VALUES (10004 , "김보라", "purple@bit.com", "rlaqhfk1234^^", "010-8526-1546", "서울 마포구 대흥동 804 1105호", 37.564320626098336, 126.90779472719049, 1, "u_pic_image04", "김퍼플");
+INSERT INTO users VALUES (10005 , "유정연", "nalrari@bit.com", "dbwjddus1234^^", "010-8569-1542", "서울 마포구 대흥동 802 509호", 37.564320626098336, 126.90779472719049, 1, "u_pic_image05", "마포구양아치");
+INSERT INTO users VALUES (10006 , "황순근", "wendy@bit.com", "tnsrms1234^^", "010-2323-1524", "서울 마포구 독막로 266 대흥동태영아파트", 37.564320626098336, 126.90779472719049, 1, "u_pic_image06", "황깔깔");
+INSERT INTO users VALUES (10007 , "장연정", "yj03@bit.com", "duswjd1234^^", "010-2133-2525", "서울 마포구 대흥로 175 신촌그랑자이", 37.564320626098336, 126.90779472719049, 1, "u_pic_image07", "피티장");
+INSERT INTO users VALUES (10008 , "임상우", "swoo23@bit.com", "tkddn1234^^", "010-4321-3020", "서울 마포구 서강대길 40 마포자이2차아파트", 37.564320626098336, 126.90779472719049, 1, "u_pic_image08", "임프레젠또");
+INSERT INTO users VALUES (10009 , "배진경", "pearjin15@bit.com", "wlsrud1234^^", "010-2133-2525", "서울 마포구 신촌로 150 신촌포스빌아파트", 37.564320626098336, 126.90779472719049, 1, "u_pic_image09", "거친진쓰");
+INSERT INTO users VALUES (10010 , "양수정", "sujug@bit.com", "tnwjd1234^^", "010-7878-1010", "서울 마포구 대흥로 175 신촌그랑자이", 37.564320626098336, 126.90779472719049, 1, "u_pic_image10", "낡은이불");
+
+CREATE TABLE professions
+(
+    `p_no`           INT             NOT NULL    AUTO_INCREMENT COMMENT '전문가번호', 
+    `u_no`           INT             NULL        COMMENT '유저번호', 
+    `p_address`      VARCHAR(200)    NULL        COMMENT '전문가 활동지역', 
+	`p_loc_x`     	 FLOAT           default 0   COMMENT '전문가 x좌표', 
+    `p_loc_y`     	 FLOAT           default 0   COMMENT '전문가 y좌표', 
+    `certification`  VARCHAR(200)    NULL        COMMENT '자격증명', 
+    `p_pic`          VARCHAR(200)    NULL        COMMENT '전문가 사진', 
+    `p_agreecheck`   INT             default 0   COMMENT '전문가 약관체크', 
+    `p_introduce`    MEDIUMTEXT      NULL        COMMENT '전문가 소개', 
+    `p_category`     VARCHAR(10)     NULL        COMMENT '전문분야', 
+    PRIMARY KEY (p_no)
+);
+
+ALTER TABLE professions COMMENT '전문가';
+
+ALTER TABLE professions
+    ADD CONSTRAINT FK_professions_u_no_users_u_no FOREIGN KEY (u_no)
+        REFERENCES users (u_no) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+INSERT INTO professions VALUES (60001, 10006 , "서울 마포구", 37.564320626098336, 126.90779472719049, "cer_image01", "p_pic_image01", 1, "조금 시끄럽지만 착한 아이", "수리");
+INSERT INTO professions VALUES (60002, 10007 , "서울 마포구", 37.564320626098336, 126.90779472719049, "cer_image02", "p_pic_image02", 1, "변태같은 깨끗함 변태 청소 새롭게 변태하는 나의 집", "청소");
+INSERT INTO professions VALUES (60003, 10008 , "서울 마포구", 37.564320626098336, 126.90779472719049, "cer_image03", "p_pic_image03", 1, "원래는 개발자가 되려했던 프레젠또! 이제는 수리 전문가", "수리");
+INSERT INTO professions VALUES (60004, 10009 , "서울 마포구", 37.564320626098336, 126.90779472719049, "cer_image04", "p_pic_image04", 1, "거친 진을 입고 무거운 것을 척척 옮겨드려요 거친진스!!", "이사");
+INSERT INTO professions VALUES (60005, 10010 , "서울 마포구", 37.564320626098336, 126.90779472719049, "cer_image05", "p_pic_image05", 1, "낡은 이불을 깨끗하게 만들어드려요 마포구 이불 지키미", "청소");
+
+
+CREATE TABLE reservations
+(
+    `rsv_no`          INT             NOT NULL    AUTO_INCREMENT COMMENT '예약번호', 
+    `u_no`            INT             NULL        COMMENT '유저번호', 
+    `p_no`            INT             NULL        COMMENT '전문가번호', 
+    `rsv_date`        DATETIME        NULL        COMMENT '예약날짜', 
+    `rsv_loc`         VARCHAR(200)    NULL        COMMENT '예약위치',
+    `rsv_pic`         VARCHAR(100)    NULL        COMMENT '사진파일명', 
+    `rsv_detail`      VARCHAR(500)    NULL        COMMENT '세부사항', 
+    `rsv_category`    VARCHAR(20)     NULL        COMMENT '카테고리', 
+    `rsv_credate`     DATETIME        NULL        COMMENT '예약접수일', 
+    `complete_check`  INT             NULL        COMMENT '서비스완료', 
+    PRIMARY KEY (rsv_no)
+);
+
+ALTER TABLE reservations COMMENT '예약';
+
+ALTER TABLE reservations
+    ADD CONSTRAINT FK_reservations_p_no_professions_p_no FOREIGN KEY (p_no)
+        REFERENCES professions (p_no) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE reservations
+    ADD CONSTRAINT FK_reservations_u_no_users_u_no FOREIGN KEY (u_no)
+        REFERENCES users (u_no) ON DELETE CASCADE ON UPDATE CASCADE;
+        
+CREATE TABLE together_board
+(
+    `t_no`        INT             NOT NULL    AUTO_INCREMENT COMMENT '함께해요글번호', 
+    `h_no`        INT             NULL        COMMENT '호스트번호', 
+    `t_header`    VARCHAR(45)     NULL        COMMENT '함께해요말머리', 
+    `t_title`     VARCHAR(100)    NULL        COMMENT '함께해요제목', 
+    `t_content`   MEDIUMTEXT      NULL        COMMENT '함께해요글내용', 
+    `t_pic`       VARCHAR(200)    NULL        COMMENT '함께해요글사진', 
+    `t_address`   VARCHAR(200)    NULL        COMMENT '함께해요주소', 
+    `t_loc_x`     FLOAT           default 0   COMMENT '함께해요x좌표', 
+    `t_loc_y`     FLOAT           default 0   COMMENT '함께해요y좌표', 
+    `t_bookmark`  INT             default 0   COMMENT '함께해요글북마크',
+    `t_credate`   DATETIME        DEFAULT CURRENT_TIMESTAMP   COMMENT '함께해요글작성일', 
+	`t_join_date` DATETIME        DEFAULT CURRENT_TIMESTAMP   COMMENT '함께해요모임날짜', 
+    `t_join_max`  INT             default 0   COMMENT '참여최대인원', 
+    `t_join_now`  INT             default 0   COMMENT '참여최소인원', 
+    `t_hits`      INT             default 0   COMMENT '함께해요 글조회수', 
+    PRIMARY KEY (t_no)
+);
+
+ALTER TABLE together_board COMMENT '함께해요_커뮤니티';
+
+ALTER TABLE together_board
+    ADD CONSTRAINT FK_together_board_h_no_users_u_no FOREIGN KEY (h_no)
+        REFERENCES users (u_no) ON DELETE CASCADE ON UPDATE CASCADE;
+
+CREATE TABLE single_board
+(
+    `s_no`        INT             NOT NULL    AUTO_INCREMENT COMMENT '혼자해요 글번호', 
+    `u_no`        INT             NULL        COMMENT '유저번호', 
+    `s_header`    VARCHAR(100)    NULL        COMMENT '혼자해요말머리', 
+    `s_title`     VARCHAR(100)    NULL        COMMENT '혼자해요제목',
+    `s_content`   MEDIUMTEXT      NULL        COMMENT '혼자해요글내용', 
+    `s_pic`       VARCHAR(200)    NULL        COMMENT '혼자해요글사진', 
+    `s_address`   VARCHAR(200)    NULL        COMMENT '혼자해요주소', 
+    `s_loc_x`     FLOAT           default 0   COMMENT '혼자해요x좌표', 
+    `s_loc_y`     FLOAT           default 0   COMMENT '혼자해요y좌표', 
+    `s_bookmark`  INT             default 0   COMMENT '혼자해요글북마크', 
+    `s_credate`   DATETIME        DEFAULT CURRENT_TIMESTAMP   COMMENT '혼자해요글작성일', 
+    `s_hits`      INT             default 0   COMMENT '혼자해요 글조회수', 
+    PRIMARY KEY (s_no)
+);
+
+
+ALTER TABLE single_board COMMENT '혼자해요_커뮤니티';
+
+ALTER TABLE single_board
+    ADD CONSTRAINT FK_single_board_u_no_users_u_no FOREIGN KEY (u_no)
+        REFERENCES users (u_no) ON DELETE CASCADE ON UPDATE CASCADE;
+
+
+CREATE TABLE professions_moving
+(
+    `p_no`              INT    NOT NULL    COMMENT '전문가번호', 
+    `p_transportation`  INT    default 0   COMMENT '용달화물운송', 
+    `p_oneroom`         INT    default 0   COMMENT '소형원룸이사', 
+    `p_keep`            INT    default 0   COMMENT '짐보관', 
+    PRIMARY KEY (p_no)
+);
+
+ALTER TABLE professions_moving COMMENT '전문가_이사';
+
+ALTER TABLE professions_moving
+    ADD CONSTRAINT FK_professions_moving_p_no_professions_p_no FOREIGN KEY (p_no)
+        REFERENCES professions (p_no) ON DELETE CASCADE ON UPDATE CASCADE;
+        
+INSERT INTO professions_moving VALUES (60004, 0, 1, 1);
+
+CREATE TABLE professions_repair
+(
+    `p_no`         INT    NOT NULL    COMMENT '전문가번호', 
+    `p_waterpipe`  INT    default 0   COMMENT '수도설치수리', 
+    `p_electric`   INT    default 0   COMMENT '전기설치수리', 
+    `p_door`       INT    default 0   COMMENT '문설치수리', 
+    `p_living`     INT    default 0   COMMENT '생활수리', 
+    `p_trash`      INT    default 0   COMMENT '철거정리', 
+    PRIMARY KEY (p_no)
+);
+
+ALTER TABLE professions_repair COMMENT '전문가_수리';
+
+ALTER TABLE professions_repair
+    ADD CONSTRAINT FK_professions_repair_p_no_professions_p_no FOREIGN KEY (p_no)
+        REFERENCES professions (p_no) ON DELETE CASCADE ON UPDATE CASCADE;
+        
+INSERT INTO professions_repair VALUES (60001, 0, 1, 1, 0, 0);
+INSERT INTO professions_repair VALUES (60003, 1, 0, 0, 1, 1);
+
+
+CREATE TABLE professions_cleaning
+(
+    `p_no`            INT    NOT NULL    COMMENT '전문가번호', 
+    `p_toilet`        INT    default 0   COMMENT '화장실청소', 
+    `p_living`        INT    default 0   COMMENT '생활청소', 
+    `p_refrigerator`  INT    default 0   COMMENT '냉장고청소', 
+    `p_arrangement`   INT    default 0   COMMENT '정리수납컨설팅', 
+    `p_homein`        INT    default 0   COMMENT '입주이사청소', 
+    PRIMARY KEY (p_no)
+);
+
+ALTER TABLE professions_cleaning COMMENT '전문가_청소';
+
+ALTER TABLE professions_cleaning
+    ADD CONSTRAINT FK_professions_cleaning_p_no_professions_p_no FOREIGN KEY (p_no)
+        REFERENCES professions (p_no) ON DELETE CASCADE ON UPDATE CASCADE;
+        
+INSERT INTO professions_cleaning VALUES (60002, 0, 1, 1, 0, 0);
+INSERT INTO professions_cleaning VALUES (60005, 1, 0, 0, 1, 1);
+
+CREATE TABLE together_reply
+(
+    `tr_no`       INT             NOT NULL    AUTO_INCREMENT COMMENT '함께해요댓글번호', 
+    `u_no`        INT             NULL        COMMENT '유저번호',
+    `t_no`        INT             NULL        COMMENT '함께해요글번호', 
+    `tr_content`  VARCHAR(300)    NULL        COMMENT '함께해요댓글내용', 
+    `tr_credate`  DATETIME        DEFAULT CURRENT_TIMESTAMP   COMMENT '함께해요댓글작성일', 
+    PRIMARY KEY (tr_no)
+);
+
+CREATE TABLE professions_bookmarks
+(
+    `p_no`  INT    NULL        COMMENT '전문가번호', 
+    `u_no`  INT    NULL        COMMENT '유저번호'
+);
+
+ALTER TABLE professions_bookmarks COMMENT '전문가_북마크';
+
+ALTER TABLE professions_bookmarks
+    ADD CONSTRAINT FK_professions_bookmarks_p_no_professions_p_no FOREIGN KEY (p_no)
+        REFERENCES professions (p_no) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE professions_bookmarks
+    ADD CONSTRAINT FK_professions_bookmarks_u_no_users_u_no FOREIGN KEY (u_no)
+        REFERENCES users (u_no) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE together_reply COMMENT '함께해요_댓글';
+
+ALTER TABLE together_reply
+    ADD CONSTRAINT FK_together_reply_u_no_users_u_no FOREIGN KEY (u_no)
+        REFERENCES users (u_no) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE together_reply
+    ADD CONSTRAINT FK_together_reply_t_no_together_board_t_no FOREIGN KEY (t_no)
+        REFERENCES together_board (t_no) ON DELETE CASCADE ON UPDATE CASCADE;
+
+CREATE TABLE single_reply
+(
+    `sr_no`      INT             NOT NULL    AUTO_INCREMENT COMMENT '혼자해요댓글번호', 
+    `s_no`       INT             NULL        COMMENT '혼자해요글번호', 
+    `u_no`       INT             NULL        COMMENT '유저번호', 
+    `s_content`  VARCHAR(300)    NULL        COMMENT '혼자해요댓글내용', 
+    `s_credate`  DATETIME        DEFAULT CURRENT_TIMESTAMP        COMMENT '혼자해요댓글작성일', 
+    PRIMARY KEY (sr_no)
+);
+
+ALTER TABLE single_reply COMMENT '혼자해요_댓글';
+
+ALTER TABLE single_reply
+    ADD CONSTRAINT FK_single_reply_u_no_users_u_no FOREIGN KEY (u_no)
+        REFERENCES users (u_no) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE single_reply
+    ADD CONSTRAINT FK_single_reply_s_no_single_board_s_no FOREIGN KEY (s_no)
+        REFERENCES single_board (s_no) ON DELETE CASCADE ON UPDATE CASCADE;
+
+CREATE TABLE together_members
+(
+    `t_no`  INT    NOT NULL    COMMENT '글번호', 
+    `g_no`  INT    NULL        COMMENT '게스트번호', 
+    PRIMARY KEY (t_no)
+);
+
+ALTER TABLE together_members COMMENT '함께해요_참가자';
+
+ALTER TABLE together_members
+    ADD CONSTRAINT FK_together_members_g_no_users_u_no FOREIGN KEY (g_no)
+        REFERENCES users (u_no) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE together_members
+    ADD CONSTRAINT FK_together_members_t_no_together_board_t_no FOREIGN KEY (t_no)
+        REFERENCES together_board (t_no) ON DELETE CASCADE ON UPDATE CASCADE;
+
+
+CREATE TABLE together_bookmarks
+(
+    `u_no`  INT    NOT NULL    COMMENT '유저번호', 
+    `t_no`  INT    NULL        COMMENT '함께해요 글번호', 
+    PRIMARY KEY (u_no)
+);
+
+ALTER TABLE together_bookmarks COMMENT '함께해요_북마크';
+
+ALTER TABLE together_bookmarks
+    ADD CONSTRAINT FK_together_bookmarks_u_no_users_u_no FOREIGN KEY (u_no)
+        REFERENCES users (u_no) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE together_bookmarks
+    ADD CONSTRAINT FK_together_bookmarks_t_no_together_board_t_no FOREIGN KEY (t_no)
+        REFERENCES together_board (t_no) ON DELETE CASCADE ON UPDATE CASCADE;
+
+
+CREATE TABLE single_bookmarks
+(
+    `u_no`  INT    NULL        COMMENT '유저번호', 
+    `s_no`  INT    NULL        COMMENT '혼자해요 글번호'
+);
+
+ALTER TABLE single_bookmarks COMMENT '혼자해요_북마크';
+
+ALTER TABLE single_bookmarks
+    ADD CONSTRAINT FK_single_bookmarks_s_no_single_board_s_no FOREIGN KEY (s_no)
+        REFERENCES single_board (s_no) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE single_bookmarks
+    ADD CONSTRAINT FK_single_bookmarks_u_no_users_u_no FOREIGN KEY (u_no)
+        REFERENCES users (u_no) ON DELETE CASCADE ON UPDATE CASCADE;
+
+
+CREATE TABLE reservations_moving
+(
+    `rsv_no`              INT    NOT NULL    COMMENT '예약번호', 
+    `rsv_transportation`  INT    default 0   COMMENT '용달/화물 운송', 
+    `rsv_oneroom`         INT    default 0   COMMENT '소형/원룸이사', 
+    `rsv_keep`            INT    default 0   COMMENT '짐 보관'
+);
+
+ALTER TABLE reservations_moving COMMENT '예약_이사';
+
+ALTER TABLE reservations_moving
+    ADD CONSTRAINT FK_reservations_moving_rsv_no_reservations_rsv_no FOREIGN KEY (rsv_no)
+        REFERENCES reservations (rsv_no) ON DELETE CASCADE ON UPDATE CASCADE;
+
+
+CREATE TABLE reservations_repair
+(
+    `rsv_no`         INT    NOT NULL    COMMENT '예약번호', 
+    `rsv_waterPipe`  INT    default 0   COMMENT '수도 관련 설치, 수리', 
+    `rsv_electric`   INT    default 0   COMMENT '전기 설치,수리', 
+    `rsv_door`       INT    default 0   COMMENT '문/창문 설치,수리', 
+    `rsv_living`     INT    default 0   COMMENT '생활 속 작은 수리', 
+    `rsv_trash`      INT    default 0   COMMENT '철거/정리'
+);
+
+ALTER TABLE reservations_repair COMMENT '예약_수리';
+
+ALTER TABLE reservations_repair
+    ADD CONSTRAINT FK_reservations_repair_rsv_no_reservations_rsv_no FOREIGN KEY (rsv_no)
+        REFERENCES reservations (rsv_no) ON DELETE CASCADE ON UPDATE CASCADE;
+
+CREATE TABLE reservations_cleaning
+(
+    `rsv_no`            INT    NOT NULL    COMMENT '예약번호', 
+    `rsv_toilet`        INT    default 0   COMMENT '화장실', 
+    `rsv_living`        INT    default 0   COMMENT '생활청소', 
+    `rsv_refrigerator`  INT    default 0   COMMENT '냉장고', 
+    `rsv_arrangement`   INT    default 0   COMMENT '정리정돈', 
+    `rsv_homein`        INT    default 0   COMMENT '이사'
+);
+
+ALTER TABLE reservations_cleaning COMMENT '예약_청소';
+
+ALTER TABLE reservations_cleaning
+    ADD CONSTRAINT FK_reservations_cleaning_rsv_no_reservations_rsv_no FOREIGN KEY (rsv_no)
+        REFERENCES reservations (rsv_no) ON DELETE CASCADE ON UPDATE CASCADE;
+
+CREATE TABLE reviews
+(
+    `review_no`       INT           NOT NULL    AUTO_INCREMENT COMMENT '리뷰번호', 
+    `p_no`            INT           NULL        COMMENT '전문가번호', 
+    `rsv_no`          INT           NULL        COMMENT '예약번호', 
+    `review_content`  MEDIUMTEXT    NULL        COMMENT '리뷰내용', 
+    `review_date`     DATETIME      DEFAULT CURRENT_TIMESTAMP        COMMENT '리뷰작성일자', 
+    `score`           FLOAT         default 0        COMMENT '별점', 
+    PRIMARY KEY (review_no)
+);
+
+ALTER TABLE reviews COMMENT '후기';
+
+ALTER TABLE reviews
+    ADD CONSTRAINT FK_reviews_rsv_no_reservations_rsv_no FOREIGN KEY (rsv_no)
+        REFERENCES reservations (rsv_no) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE reviews
+    ADD CONSTRAINT FK_reviews_p_no_professions_p_no FOREIGN KEY (p_no)
+        REFERENCES professions (p_no) ON DELETE CASCADE ON UPDATE CASCADE;
+
+INSERT INTO together_board(h_no,t_header,t_title,t_content,t_pic,t_address,t_loc_x,t_loc_y,t_bookmark,t_credate,t_join_date,t_join_max,t_join_now,t_hits)
+	VALUES(10001,'함께먹어요','마라탕 같이 먹으실 분?','신촌에 맛있는 마라탕집이 있어요','마라마라','서울시 서대문구 신촌',33,44,1,now(),"2021-03-10 17:00:00",5,2,3);
+INSERT INTO together_board(h_no,t_header,t_title,t_content,t_pic,t_address,t_loc_x,t_loc_y,t_bookmark,t_credate,t_join_date,t_join_max,t_join_now,t_hits)
+	VALUES(10001,'함께먹어요','카레 같이 먹으실 분?','홍대에 맛있는 카레집이 있어요','커리커리','서울시 마포구 홍대',36,48,1,now(),"2021-03-10 17:00:00",8,4,5);
+INSERT INTO together_board(h_no,t_header,t_title,t_content,t_pic,t_address,t_loc_x,t_loc_y,t_bookmark,t_credate,t_join_date,t_join_max,t_join_now,t_hits)
+	VALUES(10001,'함께먹어요','짜장 같이 먹으실 분?','홍대에 맛있는 중국집이 있어요','짜장짜장','서울시 마포구 홍대',36,48,1,now(),"2021-03-10 17:00:00",8,4,5);
+INSERT INTO together_board(h_no,t_header,t_title,t_content,t_pic,t_address,t_loc_x,t_loc_y,t_bookmark,t_credate,t_join_date,t_join_max,t_join_now,t_hits)
+	VALUES(10001,'함께먹어요','커피 같이 마실 분?','신촌에 맛있는 카페가 있어요','커피커피','서울시 마포구 신촌',36,48,1,now(),"2021-03-10 17:00:00",8,4,5);
+INSERT INTO together_board(h_no,t_header,t_title,t_content,t_pic,t_address,t_loc_x,t_loc_y,t_bookmark,t_credate,t_join_date,t_join_max,t_join_now,t_hits)
+	VALUES(10001,'함께먹어요','족발 같이 먹으실 분?','신촌에 맛있는 족발집이 있어요','족발족발','서울시 마포구 신촌',36,48,1,now(),"2021-03-10 17:00:00",8,4,5);
+INSERT INTO together_board(h_no,t_header,t_title,t_content,t_pic,t_address,t_loc_x,t_loc_y,t_bookmark,t_credate,t_join_date,t_join_max,t_join_now,t_hits)
+	VALUES(10002,'함께먹어요','라면 같이 먹으실 분?','신촌에 맛있는 라면집이 있어요','라면라면','서울시 마포구 신촌',36,48,1,now(),"2021-03-10 17:00:00",8,4,5);
+INSERT INTO together_board(h_no,t_header,t_title,t_content,t_pic,t_address,t_loc_x,t_loc_y,t_bookmark,t_credate,t_join_date,t_join_max,t_join_now,t_hits)
+	VALUES(10002,'함께먹어요','토스트 같이 먹으실 분?','신촌에 맛있는 토스트집이 있어요','토스트바라기','서울시 마포구 신촌',36,48,1,now(),"2021-03-10 17:00:00",8,4,5);    
+    
+INSERT INTO together_board(h_no,t_header,t_title,t_content,t_pic,t_address,t_loc_x,t_loc_y,t_bookmark,t_credate,t_join_date,t_join_max,t_join_now,t_hits)
+	VALUES(10003,'함께출퇴근해요','신촌에서 홍대로 같이 출근하실분?','아침 8시에 신촌역 3번출구 앞에서 홍대역 2번출구로 같이 출근하실분?','폭주기관차','서울시 마포구 신촌',36,48,1,now(),"2021-03-10 17:00:00",8,4,5);
+INSERT INTO together_board(h_no,t_header,t_title,t_content,t_pic,t_address,t_loc_x,t_loc_y,t_bookmark,t_credate,t_join_date,t_join_max,t_join_now,t_hits)
+	VALUES(10003,'함께출퇴근해요','이태원에서 강남으로 같이 출근하실분?','아침 8시에 이태원역 3번출구 앞에서 강남역 2번출구로 같이 출근하실분?','폭주기관차','서울시 마포구 신촌',36,48,1,now(),"2021-03-10 17:00:00",8,4,5);
+INSERT INTO together_board(h_no,t_header,t_title,t_content,t_pic,t_address,t_loc_x,t_loc_y,t_bookmark,t_credate,t_join_date,t_join_max,t_join_now,t_hits)
+	VALUES(10003,'함께출퇴근해요','목동에서 홍대로 같이 출근하실분?','아침 7시까지 오목교역 3번출구 앞에서 홍대역 2번출구로 같이 출근하실분?','폭주기관차','서울시 마포구 신촌',36,48,1,now(),"2021-03-10 17:00:00",8,4,5);
+INSERT INTO together_board(h_no,t_header,t_title,t_content,t_pic,t_address,t_loc_x,t_loc_y,t_bookmark,t_credate,t_join_date,t_join_max,t_join_now,t_hits)
+	VALUES(10003,'함께출퇴근해요','건대에서 강남로 같이 출근하실분?','아침 8시까지 건대역 3번출구 앞에서 강남역 2번출구로 같이 출근하실분?','폭주기관차','서울시 마포구 신촌',36,48,1,now(),"2021-03-10 17:00:00",8,4,5);
+
+INSERT INTO together_board(h_no,t_header,t_title,t_address,t_join_date,
+			t_join_max,t_content,t_credate)
+		VALUES(10001,'함께먹어요','보쌈 같이 드실분?','서울시 마포구',"2021-03-10 17:00:00",
+			5,'보쌈 맛있엉',now()); 
+
+
